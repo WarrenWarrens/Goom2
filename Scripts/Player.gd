@@ -204,7 +204,13 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	update_hud_stats()
 	
-#func _unhandled_input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion and cursor_locked:
+		# Yaw: rotate the whole player body left/right
+		rotate_y(-event.relative.x * MOUSE_SENS)
+		# Pitch: rotate just the head up/down, clamped so we can't flip over
+		head.rotate_x(-event.relative.y * MOUSE_SENS)
+		head.rotation.x = clamp(head.rotation.x, deg_to_rad(-89.0), deg_to_rad(89.0))
 
 
 
@@ -284,4 +290,3 @@ func update_hud_stats() -> void:
 
 		
 	state_label.text = "State: " + current_state
-	
