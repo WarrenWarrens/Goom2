@@ -52,31 +52,6 @@ var original_shape_y: float
 var original_head_y: float
 var cursor_locked = true
 
-#Hanging Variables
-var is_hanging: bool = false
-var ledge_axis: Vector3 = Vector3.ZERO
-const HANG_SPEED: float = 3.0
-const HANG_DRAIN_RATE: float = 10.0
-var ledge_normal: Vector3 = Vector3.ZERO
-
-var pull_up_released: bool = true
-var pull_up_progress: float = 0.0
-var pull_up_counted: bool = false
-const PULL_UP_COST: float = 20.0
-const PULL_UP_SPEED: float = 1.5
-var ledge_can_climb: bool = false
-
-#Ladder
-var is_on_ladder: bool = false
-var ladder_normal: Vector3 = Vector3.ZERO
-const LADDER_SPEED: float = 4.0
-const LADDER_DRAIN_RATE: float = 4.0
-const TRAVERSE_COST: float = 15.0
-var current_climb_target: Node3D = null
-
-var holding_left_hand: bool = true
-var holding_right_hand: bool = true
-const ONE_HAND_DRAIN_MULT: float = 1.75 # Drains 75% faster when using one hand!
 
 
 func _ready() -> void:
@@ -103,152 +78,6 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("left", "right", "up", "down")
-	if is_hanging:
-		update_hand_states(ledge_normal)
-		
-		var current_hang_drain = HANG_DRAIN_RATE
-		if not holding_left_hand or not holding_right_hand:
-			if right_dom_hand:
-				if not holding_left_hand:
-					current_hang_drain *= ONE_HAND_DRAIN_MULT
-				else:
-					current_hang_drain *= (ONE_HAND_DRAIN_MULT * 1.5)
-			elif not right_dom_hand:
-				if not holding_right_hand:
-					current_hang_drain *= ONE_HAND_DRAIN_MULT
-				else:
-					current_hang_drain *= (ONE_HAND_DRAIN_MULT * 1.5)
-				
-
-		
-		var wants_pull_up = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT)
-	
-		if not wants_pull_up:
-			pull_up_released = true
-			
-		if wants_pull_up and pull_up_released and PlayerStats.stamina > 0 and holding_left_hand and holding_right_hand:
-			if pull_up_progress < 1.0:
-				pull_up_progress += delta * PULL_UP_SPEED
-				PlayerStats.change_stamina(-PULL_UP_COST * delta * PULL_UP_SPEED)
-			else:
-				PlayerStats.change_stamina(-current_hang_drain * delta)
-				
-				if ledge_can_climb and Input.is_action_just_pressed("up"):
-					vault_over_obstacle()
-					return
-		else:
-			pull_up_progress -= delta * PULL_UP_SPEED
-			PlayerStats.change_stamina(-current_hang_drain * delta)
-			
-		PlayerStats.stamina_delay_timer = STAMINA_DELAY
-		pull_up_progress = clamp(pull_up_progress, 0.0, 1.0)
-		
-		if pull_up_progress == 1.0 and not pull_up_counted:
-			PlayerStats.add_pull_up()
-			pull_up_counted = true
-		elif pull_up_progress < 0.1:
-			pull_up_counted = false
-		
-		var target_hang_head_y = original_head_y + (pull_up_progress * (original_capsule_height * 0.35))
-		head.position.y = target_hang_head_y
-		
-		if PlayerStats.stamina <= 0 or Input.is_action_just_pressed("crouch"):
-			stop_hanging()
-			pull_up_progress = 0.0
-			head.position.y = original_head_y
-			return
-			
-		# Lock all horizontal movement while doing a pull-up
-		if pull_up_progress > 0.0:
-			velocity = Vector3.ZERO
-		else:
-			#var input_dir := Input.get_vector("left", "right", "up", "down")
-			var alignment = sign(transform.basis.x.dot(ledge_axis))
-			if alignment == 0:
-				alignment = 1.0
-				
-			var move_dir = ledge_axis * (input_dir.x * alignment)
-			
-			# --- Bulletproof Edge Block Check ---
-			if move_dir.length() > 0:
-				# FIX: Shoot from slightly lower down (0.25) so it doesn't skim the top lip
-				var chest_position = global_position + Vector3(0, original_capsule_height * 0.33, 0)
-				var future_chest_pos = chest_position + (move_dir * 0.80)
-				
-				var space_state = get_world_3d().direct_space_state
-				
-				# FIX: Extended ray length to 1.0 to easily cover the new gap
-				var query = PhysicsRayQueryParameters3D.create(future_chest_pos, future_chest_pos - ledge_normal * 1.0)
-				# FIX: Tell the ray to completely ignore the player's collision box
-				query.exclude = [self.get_rid()]
-				
-				var result = space_state.intersect_ray(query)
-				
-				if result.is_empty() or not result.collider.has_method("get_ledge_axis"):
-					move_dir = Vector3.ZERO
-					
-				# If the ray misses the wall entirely, block the movement input!
-				#if result.is_empty() or result.collider != current_climb_target:
-					#move_dir = Vector3.ZERO
-					
-			velocity = move_dir * HANG_SPEED
-			
-		move_and_slide()
-		update_hud_stats() # <--- Add this right here!
-		return
-	# --- LADDER STATE OVERRIDE ---
-	if is_on_ladder:
-		# Check if we want to fast-slide down
-		update_hand_states(ladder_normal)
-		var current_ladder_drain = LADDER_DRAIN_RATE
-		
-		if not holding_left_hand or not holding_right_hand:
-			current_ladder_drain *= ONE_HAND_DRAIN_MULT
-		
-		if Input.is_action_pressed("sprint"):
-			# Move straight down at double speed with ZERO stamina drain
-			velocity = Vector3.DOWN * (LADDER_SPEED * 2.0)
-			move_and_slide()
-			
-			# Automatically let go if we hit the floor while sliding!
-			if is_on_floor():
-				stop_ladder()
-		
-			return
-		
-		PlayerStats.change_stamina(-current_ladder_drain * delta)
-		PlayerStats.stamina_delay_timer = STAMINA_DELAY
-		
-
-		
-		# Drop if out of stamina or pressing crouch
-		if PlayerStats.stamina <= 0 or Input.is_action_just_pressed("crouch"):
-			stop_ladder()
-			return
-			
-		#var input_dir := Input.get_vector("left", "right", "up", "down")
-		
-		# Move Left/Right locally, and Up/Down globally
-		# (Input 'up' returns -y, so multiplying by -1 makes W go UP)
-		
-		var move_dir = (transform.basis.x * input_dir.x) + (Vector3.UP * -input_dir.y)
-		
-		velocity = move_dir * LADDER_SPEED
-		move_and_slide()
-		
-		# --- Auto-Vault Check (Code-based RayCast) ---
-		if velocity.y > 0: # Only check if we are moving UP
-			var space_state = get_world_3d().direct_space_state
-			# Shoot an invisible laser from our chest, straight forward into the ladder
-			var query = PhysicsRayQueryParameters3D.create(global_position, global_position - ladder_normal * 0.8)
-			var result = space_state.intersect_ray(query)
-			
-			# If the laser hits nothing, our chest has cleared the top of the ladder!
-			if result.is_empty():
-				vault_over_obstacle()
-				
-		return # Skip normal gravity and walking
-	# --- END LADDER OVERRIDE ---
 	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -263,16 +92,6 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("sprint") and is_moving and not PlayerStats.get_stealth() and not PlayerStats.get_prone() and PlayerStats.stamina > 0:
 		is_sprinting = true
 
-	# --- 2. Crouch, Prone & Slide Trigger Logic ---
-	if Input.is_action_just_pressed("prone"):
-		if PlayerStats.get_prone():
-			# Trying to stand up from prone
-			if not ceiling_check.is_colliding():
-				PlayerStats.change_prone()
-		else:
-			# Going into prone (Belly flop!)
-			PlayerStats.change_prone()
-			is_sliding = false 
 
 	if Input.is_action_just_pressed("crouch"):
 		if PlayerStats.get_stealth():
@@ -385,173 +204,21 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	update_hud_stats()
 	
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		var yaw_change = -event.relative.x * MOUSE_SENS
-		
-		# --- Camera Restriction During Pull-up ---
-		if is_hanging and pull_up_progress > 0.0:
-			# Preview what our rotation would be if we allowed the mouse movement
-			var future_basis = transform.basis.rotated(Vector3.UP, yaw_change)
-			var future_forward = -future_basis.z
-			
-			# If the turn pushes us beyond the 60-degree threshold, block the turn!
-			if future_forward.dot(ledge_normal) > -0.5:
-				yaw_change = 0.0 
-				
-		# Apply the horizontal turn
-		rotate_y(yaw_change)
-
-		# Apply the vertical head look (pitch)
-		head.rotate_x(-event.relative.y * MOUSE_SENS)
-		head.rotation.x = clamp(head.rotation.x, -1.2, 1.2)
-		
 #func _unhandled_input(event: InputEvent) -> void:
-	#if event is InputEventMouseMotion:
-		#rotate_y(-event.relative.x * MOUSE_SENS)
-		#head.rotate_x(-event.relative.y * MOUSE_SENS)
-		#head.rotation.x = clamp(head.rotation.x, -1.2, 1.2)
+
+
 
 func _process(_delta: float) -> void:
-	if is_hanging or is_on_ladder:
-		
-		interact_ray.target_position.z = -8.0 # Long reach for leaping
-	else:
-		interact_ray.target_position.z = -4.0 # Standard reach for ground interaction
-	# 1. Default state: hide the prompt
-	interact_prompt.visible = false
 	
-	# 2. Raycast Interaction Logic
-	# 2. ShapeCast Interaction Logic
-	
-	if interact_ray.is_colliding():
-		var target = interact_ray.get_collider()
-		
-		if target != null:
-			# Grab the normal and point immediately for filtering
-			var hit_point = interact_ray.get_collision_point()
-			var hit_normal = interact_ray.get_collision_normal()
-			
-			if is_hanging or is_on_ladder:
-				if hit_point.distance_to(camera.global_position) < 2.0:
-					return
-			
-				
-			var is_vertical_face = abs(hit_normal.y) < 0.05
-			
-			# --- FACE FILTERING MATH ---
-			# 1. Is the face completely vertical? (Rejects tops and bottoms)
-			var player_forward = -camera.global_transform.basis.z
-			var is_facing_surface = hit_normal.dot(player_forward) < 0.5
-			# 2. Is the player generally looking AT the face? (Rejects side-glancing)
-			
-			# ---------------------------
 
-			# --- Ledge Logic ---
-			# Added our two new face filtering checks here!
-			if target.has_method("get_ledge_axis") and is_vertical_face and is_facing_surface:
-				var is_traversing = is_hanging or is_on_ladder
-				
-				interact_prompt.text = "[E] Leap to Ledge" if is_traversing else "[E] " + target.prompt_message
-				interact_prompt.visible = true
-				
-				if Input.is_action_just_pressed("interact"):
-					if is_traversing:
-						if PlayerStats.stamina >= TRAVERSE_COST:
-							PlayerStats.change_stamina(-TRAVERSE_COST)
-							PlayerStats.stamina_delay_timer = STAMINA_DELAY
-							is_hanging = false 
-							is_on_ladder = false
-							start_hanging(target, target.get_ledge_axis(), hit_point, hit_normal, target.get_can_climb())
-					else:
-						start_hanging(target, target.get_ledge_axis(), hit_point, hit_normal, target.get_can_climb())
-						
-			# --- Ladder Logic ---
-			# Ladders also benefit from the face filtering checks!
-			elif target.has_method("get_is_ladder") and is_vertical_face and is_facing_surface:
-				var is_traversing = is_hanging or is_on_ladder
-				
-				interact_prompt.text = "[E] Leap to Ladder" if is_traversing else "[E] " + target.prompt_message
-				interact_prompt.visible = true
-				
-				if Input.is_action_just_pressed("interact"):
-					if is_traversing:
-						if PlayerStats.stamina >= TRAVERSE_COST:
-							PlayerStats.change_stamina(-TRAVERSE_COST)
-							PlayerStats.stamina_delay_timer = STAMINA_DELAY
-							is_hanging = false
-							is_on_ladder = false
-							start_ladder(target, hit_normal, hit_point)
-					else:
-						start_ladder(target, hit_normal, hit_point)
-
-			# --- Door / Object Logic ---
-			elif target.has_method("interact") and not is_hanging and not is_on_ladder:
-				interact_prompt.text = "[E] " + target.prompt_message
-				interact_prompt.visible = true
-				if Input.is_action_just_pressed("interact"):
-					target.interact()
-					
 	# 3. Weapon Switching Logic
-	if Input.is_action_just_pressed("switch_weapon") and not is_hanging and not is_on_ladder:
+	if Input.is_action_just_pressed("switch_weapon"):
 		current_weapon_index = (current_weapon_index + 1) % weapons.size()
 		equip_weapon(current_weapon_index)
 
-func start_hanging(target: Node3D, axis: Vector3, hit_point: Vector3, hit_normal: Vector3, can_climb_flag: bool) -> void:
-	is_hanging = true
-	current_climb_target = target # Save the target!
 
-	var auto_axis = Vector3.UP.cross(hit_normal)
-	if auto_axis.length() < 0.01:
-		ledge_axis = axis
-	else:
-		ledge_axis = auto_axis.normalized()
-
-	ledge_can_climb = can_climb_flag
-	ledge_normal = hit_normal 
-	
-	pull_up_progress = 0.0 
-	velocity = Vector3.ZERO
-	pull_up_released = false # <--- Add this! Forces them to let go first
-	
-	PlayerStats.change_action(0)
-	
-	if PlayerStats.get_stealth(): PlayerStats.change_stealth()
-	if PlayerStats.get_prone(): PlayerStats.change_prone()
-	is_sliding = false
-	is_dodging = false
-	
-	# --- TOP LIP SNAPPING ---
-	# Shoot a ray down from slightly inside the wall, starting high above the player
-	var space_state = get_world_3d().direct_space_state
-	var lip_check_start = hit_point - (hit_normal * 0.1)
-	lip_check_start.y = hit_point.y + 1.2
-	var query = PhysicsRayQueryParameters3D.create(lip_check_start, lip_check_start + (Vector3.DOWN * 2.0))
-	query.exclude = [self.get_rid()]
-	var result = space_state.intersect_ray(query)
-	
-	var final_hang_y = hit_point.y
-	if not result.is_empty():
-		final_hang_y = result.position.y # We found the exact top of the box!
-	
-	global_position = Vector3(hit_point.x, final_hang_y, hit_point.z) + (hit_normal * 0.6) - Vector3(0, original_capsule_height * 0.85, 0)
-
-	var look_target = global_position - hit_normal
-	look_target.y = global_position.y
-	look_at(look_target, Vector3.UP)
-	head.rotation.x = 0
-	
-	hide_current_weapon()
 	
 	
-func stop_hanging() -> void:
-	is_hanging = false
-	holding_left_hand = true
-	holding_right_hand = true
-	current_climb_target = null 
-	PlayerStats.change_action(1)
-	equip_weapon(current_weapon_index)
-
 
 func equip_weapon(index: int) -> void:
 	for i in range(weapons.size()):
@@ -592,51 +259,7 @@ func hide_current_weapon() -> void:
 	ammo_label.visible = false
 	
 			
-func vault_over_obstacle() -> void:
-	var forward_dir = -transform.basis.z 
-   
-	global_position += Vector3(0, original_capsule_height * 0.9, 0) + (forward_dir * 1.2)
-	
-	stop_hanging()
-	stop_ladder()
-	
-	pull_up_progress = 0.0
-	head.position.y = original_head_y
 
-func start_ladder(target: Node3D, hit_normal: Vector3, hit_point: Vector3) -> void:
-	
-	is_on_ladder = true
-	current_climb_target = target # Save the target!
-	ladder_normal = hit_normal
-	pull_up_progress = 0.0
-	velocity = Vector3.ZERO
-	PlayerStats.change_action(0) 
-	
-	if PlayerStats.get_stealth(): PlayerStats.change_stealth()
-	if PlayerStats.get_prone(): PlayerStats.change_prone()
-	is_sliding = false
-	is_dodging = false
-
-	# Teleport to the ladder so mid-air leaps connect perfectly!
-	# (Using a slightly different offset than ledges so the player centers on the rungs)
-	global_position = hit_point + (hit_normal * 0.6) - Vector3(0, original_capsule_height * 0.75, 0)
-
-	var look_target = global_position - ladder_normal
-	look_target.y = global_position.y
-	look_at(look_target, Vector3.UP)
-	head.rotation.x = 0
-	hide_current_weapon() # <--- Add this at the end of the function!
-
-	
-
-
-func stop_ladder() -> void:
-	is_on_ladder = false
-	holding_left_hand = true
-	holding_right_hand = true
-	current_climb_target = null
-	PlayerStats.change_action(1)
-	equip_weapon(current_weapon_index)
 
 func update_hud_stats() -> void:
 	# 1. Calculate horizontal speed (ignoring gravity/falling speed)
@@ -648,47 +271,17 @@ func update_hud_stats() -> void:
 	# 2. Determine the current state based on your hierarchy
 	var current_state = "Standing"
 	
-	if is_hanging:
-		current_state = "Hanging"
-	elif is_on_ladder:
-		current_state = "Climbing"
-	elif is_sliding:
+	
+	if is_sliding:
 		current_state = "Sliding"
 	elif is_dodging:
 		current_state = "Dodging"
-	elif PlayerStats.get_prone():
-		current_state = "Prone"
 	elif PlayerStats.get_stealth():
 		current_state = "Crouched"
 	elif Input.is_action_pressed("sprint") and current_speed > WALK_SPEED:
 		# Only say sprinting if they are actually moving fast enough
 		current_state = "Sprinting" 
-	if is_hanging or is_on_ladder:
-		if not holding_right_hand:
-			current_state += " (Left Hand Only)"
-		elif not holding_left_hand:
-			current_state += " (Right Hand Only)"
-		else:
-			current_state += " (Both Hands)"
+
 		
 	state_label.text = "State: " + current_state
 	
-func update_hand_states(wall_normal: Vector3) -> void:
-	var look_dot = (-transform.basis.z).dot(wall_normal)
-	var right_dot = transform.basis.x.dot(wall_normal)
-	
-	# -1.0 means looking dead at the wall. 
-	# > -0.5 means looking more than 60 degrees away (over a shoulder).
-	if look_dot > -0.5:
-		if right_dot > 0:
-			# Looking right (over right shoulder) -> right hand lets go, left holds!
-			holding_left_hand = true
-			holding_right_hand = false
-		else:
-			# Looking left (over left shoulder) -> left hand lets go, right holds!
-			holding_left_hand = false
-			holding_right_hand = true
-	else:
-		# Looking generally forward -> both hands on the wall
-		holding_left_hand = true
-		holding_right_hand = true
