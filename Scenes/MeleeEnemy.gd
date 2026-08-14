@@ -114,6 +114,6 @@ func perform_attack():
 	# Verify the player hasn't dodged behind a wall at the last second
 	if los_ray.get_collider() == player:
 		if player.has_method("take_damage"):
-			player.take_damage(damage)
+			player.take_damage(damage, global_position)
 			
 	attack_timer.start(attack_cooldown)

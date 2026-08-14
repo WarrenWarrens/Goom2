@@ -22,6 +22,8 @@ const BASE_FOV: float = 75.0
 
 var current_weapon_index: int = 0
 var cursor_locked = true
+var knockback_velocity: Vector3 = Vector3.ZERO
+
 
 func _ready() -> void:
 	get_window().grab_focus()
@@ -54,6 +56,9 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, WALK_SPEED)
 		velocity.z = move_toward(velocity.z, 0, WALK_SPEED)
 
+	knockback_velocity = knockback_velocity.move_toward(Vector3.ZERO, delta * 50)
+	velocity += knockback_velocity
+	
 	move_and_slide()
 	update_hud_stats()
 	
@@ -125,9 +130,13 @@ func update_hud_stats() -> void:
 	if health_label:
 		health_label.text = "HP: " + PlayerStats.get_health()
 
-func take_damage(amount: int):
+func take_damage(amount: int, attacker_pos: Vector3):
 	# Route the damage to the singleton
 	PlayerStats.take_damage(amount)
+	
+	var kb_dir = (global_position - attacker_pos).normalized()
+	kb_dir.y = 0.5
+	knockback_velocity = kb_dir * 5.0
 
 #extends CharacterBody3D
 #
