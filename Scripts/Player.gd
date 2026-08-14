@@ -18,6 +18,7 @@ const BASE_FOV: float = 75.0
 @onready var ammo_label = $HUD/MarginContainer/Stats/Ammo2/AmmoLabel
 @onready var speed_label = $HUD/SpeedLabel
 @onready var state_label = $HUD/StateLabel
+@onready var health_label = $HUD/MarginContainer/Stats/Values/HealthLabel
 
 var current_weapon_index: int = 0
 var cursor_locked = true
@@ -115,7 +116,14 @@ func update_hud_stats() -> void:
 	
 	if state_label:
 		state_label.text = "State: Walking"
+		
+	# Inside update_hud_stats() in Player.gd
+	if health_label:
+		health_label.text = "HP: " + PlayerStats.get_health()
 
+func take_damage(amount: int):
+	# Route the damage to the singleton
+	PlayerStats.take_damage(amount)
 
 #extends CharacterBody3D
 #

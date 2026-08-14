@@ -33,6 +33,13 @@ func _process(_delta: float) -> void:
 			gun_sprite.play("Shoot2")
 			left = true
 		make_flash()
+		for ray in gun_rays:
+			ray.force_raycast_update()
+			if ray.is_colliding():
+				var target = ray.get_collider()
+				# Assuming your enemy scripts have a take_damage function
+				if target.has_method("take_damage"):
+					target.take_damage(damage)
 		#check_hit()
 		PlayerInventory.change_pistol_ammo(-1)
 		can_shoot = false

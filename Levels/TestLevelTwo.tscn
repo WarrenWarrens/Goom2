@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://dthyte7wxyyji" path="res://Scripts/Doors.gd" id="11_kih24"]
 [ext_resource type="Script" uid="uid://cbve1v0dvw6cp" path="res://Scripts/Ladder.gd" id="12_fqk6u"]
 [ext_resource type="PackedScene" uid="uid://ckudr8chj1kgo" path="res://Scenes/Player.tscn" id="13_kih24"]
+[ext_resource type="PackedScene" uid="uid://b118ljdbmw62g" path="res://Scenes/MeleeEnemy.tscn" id="15_epros"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_epros"]
 _surfaces = [{
@@ -3613,3 +3614,6 @@ light_energy = 3.337
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=812005426]
 environment = SubResource("Environment_ttpud")
+
+[node name="MeleeEnemy" parent="." unique_id=2078049976 instance=ExtResource("15_epros")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.128456, 1.0509043, -39.27126)
