@@ -1,12 +1,10 @@
-
 extends Node3D
 
 @onready var weapon_sprite = $CanvasLayer/Control/WeaponSprite
 @onready var gun_rays = $GunRays.get_children()
 
-
-var can_attack = PlayerStats.get_action()
-
+var can_attack: bool = true
+var damage: int = 15 # Set this to whatever melee damage you prefer
 
 func _ready() -> void:
 	weapon_sprite.play("Idle")
@@ -15,24 +13,21 @@ func _ready() -> void:
 
 func _exit_tree() -> void:
 	PlayerStats.change_action(1)
-	
+
 func check_hit():
-	pass
+	for ray in gun_rays:
+		ray.force_raycast_update()
+		if ray.is_colliding():
+			var target = ray.get_collider()
+			if target.has_method("take_damage"):
+				target.take_damage(damage)
 
 func _process(_delta: float) -> void:
-	
 	can_attack = PlayerStats.get_action()
-	# --- Desperation Attack Math ---
-	
-	# We can attack if we have 0 deficit, OR enough regular stamina to cover 2x the missing amount
-	
-	
 	
 	if Input.is_action_just_pressed("shoot") and can_attack:
 		weapon_sprite.play("Attack")
 		check_hit()
-		
-		# Apply the stamina costs
 		
 		can_attack = false
 		PlayerStats.change_action(0)

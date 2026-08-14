@@ -25,7 +25,7 @@ func make_flash():
 func _process(_delta: float) -> void:
 	can_shoot = PlayerStats.get_action()
 	
-	if Input.is_action_just_pressed("shoot") and can_shoot and PlayerInventory.ammo_pistol > 0:
+	if Input.is_action_just_pressed("shoot") and can_shoot and PlayerInventory.ammo["pistol"] > 0:
 		if left == true:
 			gun_sprite.play("Shoot")
 			left = false
@@ -41,7 +41,7 @@ func _process(_delta: float) -> void:
 				if target.has_method("take_damage"):
 					target.take_damage(damage)
 		#check_hit()
-		PlayerInventory.change_pistol_ammo(-1)
+		PlayerInventory.change_ammo("pistol", -1)
 		can_shoot = false
 		
 		await(gun_sprite.animation_finished)

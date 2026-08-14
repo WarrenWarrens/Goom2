@@ -18,7 +18,7 @@ const BASE_FOV: float = 75.0
 @onready var ammo_label = $HUD/MarginContainer/Stats/Ammo2/AmmoLabel
 @onready var speed_label = $HUD/SpeedLabel
 @onready var state_label = $HUD/StateLabel
-@onready var health_label = $HUD/MarginContainer/Stats/Values/HealthLabel
+@onready var health_label = $HUD/MarginContainer/Stats/Values/HealthValue
 
 var current_weapon_index: int = 0
 var cursor_locked = true
@@ -66,11 +66,15 @@ func _unhandled_input(event: InputEvent) -> void:
 		head.rotation.x = clamp(head.rotation.x, deg_to_rad(-89.0), deg_to_rad(89.0))
 
 func _process(_delta: float) -> void:
-	# Weapon Switching Logic
-	if Input.is_action_just_pressed("switch_weapon"):
-		current_weapon_index = (current_weapon_index + 1) % weapons.size()
+	# Direct weapon switching using number keys
+	if Input.is_action_just_pressed("weapon_1") and weapons.size() > 0:
+		current_weapon_index = 0
 		equip_weapon(current_weapon_index)
-
+	elif Input.is_action_just_pressed("weapon_2") and weapons.size() > 1:
+		current_weapon_index = 1
+		equip_weapon(current_weapon_index)
+	# Add more elif statements as you expand your weapons array
+	
 func equip_weapon(index: int) -> void:
 	for i in range(weapons.size()):
 		if i == index:

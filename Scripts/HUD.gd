@@ -10,5 +10,5 @@ extends CanvasLayer
 func _process(_delta):
 	armour.text = PlayerStats.get_armour()
 	health.text = PlayerStats.get_health()
-	ammo.text = PlayerInventory.get_pistol_ammo()
+	ammo.text = PlayerInventory.get_ammo('pistol')
 	
