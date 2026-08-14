@@ -3,11 +3,10 @@ extends Node3D
 
 @onready var weapon_sprite = $CanvasLayer/Control/KickSprite
 # Since kicking doesn't use gun rays, you can remove that variable if you don't need it
+@onready var gun_rays = $GunRays.get_children()
 
 var can_attack = true
-
-const B_STAMINA_COST: float = 25.0
-const REGEN_DELAY: float = 1.5
+var damage: int = 15 # Set this to whatever melee damage you prefer
 
 func _ready() -> void:
 	weapon_sprite.play("Idle")
@@ -16,7 +15,12 @@ func _exit_tree() -> void:
 	PlayerStats.change_action(1)
 	
 func check_hit():
-	pass
+	for ray in gun_rays:
+		ray.force_raycast_update()
+		if ray.is_colliding():
+			var target = ray.get_collider()
+			if target.has_method("take_damage"):
+				target.take_damage(damage)
 
 # THIS WAS MISSING: We need this so the game checks for the input every frame!
 func _process(_delta: float) -> void:
@@ -32,11 +36,13 @@ func _process(_delta: float) -> void:
 		weapon_sprite.play("Kick")
 		check_hit()
 		
+		can_attack = false
+		PlayerStats.change_action(0)
+		
 		# Apply the stamina costs
 		
 
 		# Lock global actions so we can't shoot our gun while kicking!
-		PlayerStats.change_action(0) 
 		
 		await weapon_sprite.animation_finished
 		

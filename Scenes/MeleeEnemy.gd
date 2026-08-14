@@ -73,7 +73,7 @@ func die():
 			#elif attack_timer.is_stopped():
 				#perform_attack()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if not player: return
 	
 	var distance_to_player = global_position.distance_to(player.global_position)
