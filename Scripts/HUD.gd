@@ -4,8 +4,6 @@ extends CanvasLayer
 @onready var armour = $MarginContainer/Stats/Values/ArmourValue
 @onready var health = $MarginContainer/Stats/Values/HealthValue
 @onready var ammo = $MarginContainer/Stats/Values/AmmoValue
-@onready var stamina = $MarginContainer/Stats/Ammo/StaminaValue
-@onready var battlestamina = $MarginContainer/Stats/Ammo/BattleStaminaValue
 
 func _process(_delta):
 	armour.text = PlayerStats.get_armour()

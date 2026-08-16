@@ -10,7 +10,6 @@ const BASE_FOV: float = 75.0
 @onready var camera: Camera3D = $Head/Camera3D
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 @onready var interact_ray = $Head/Camera3D/InteractionRay
-#@onready var axe = $Head/Axe
 @onready var pistol = $Head/Pistol
 @onready var weapons = [pistol]
 @onready var ammo_counter = $HUD/MarginContainer/Stats/Values/AmmoValue
@@ -35,7 +34,6 @@ func _ready() -> void:
 	camera.current = true
 	camera.fov = BASE_FOV
 	
-	# --- Slope & Stair Snapping Settings ---
 	floor_constant_speed = true 
 	floor_stop_on_slope = true
 	floor_max_angle = deg_to_rad(45.0)
@@ -50,7 +48,6 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("left", "right", "up", "down")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
-	# --- Apply Movement Speed ---
 	if direction:
 		velocity.x = direction.x * WALK_SPEED
 		velocity.z = direction.z * WALK_SPEED
@@ -64,17 +61,13 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	update_hud_stats()
 	if is_on_floor() and last_y_velocity < -15.0:
-		# Calculate damage based on how fast you were falling
 		var fall_damage = int(abs(last_y_velocity) * 1.5)
 
-		# Pass the floor's position as the "attacker" so knockback (if any) pushes up
 		take_damage(fall_damage, global_position - Vector3(0, 1, 0))
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and cursor_locked:
-		# Yaw: rotate the whole player body left/right
 		rotate_y(-event.relative.x * MOUSE_SENS)
-		# Pitch: rotate just the head up/down, clamped so we can't flip over
 		head.rotate_x(-event.relative.y * MOUSE_SENS)
 		head.rotation.x = clamp(head.rotation.x, deg_to_rad(-89.0), deg_to_rad(89.0))
 
@@ -104,13 +97,6 @@ func equip_weapon(index: int) -> void:
 			
 			if weapons[i].has_node("CanvasLayer"):
 				weapons[i].get_node("CanvasLayer").visible = true
-			
-			#if weapons[i].get("is_gun") == true:
-				#ammo_counter.visible = true
-				#ammo_label.visible = true
-			#else:
-				#ammo_counter.visible = false
-				#ammo_label.visible = false
 		else:
 			weapons[i].visible = false
 			weapons[i].set_process(false)
@@ -132,7 +118,6 @@ func hide_current_weapon() -> void:
 	ammo_label.visible = false
 			
 func update_hud_stats() -> void:
-	# Calculate horizontal speed (ignoring gravity/falling speed)
 	var current_speed = Vector2(velocity.x, velocity.z).length()
 	
 	if speed_label:
@@ -141,12 +126,10 @@ func update_hud_stats() -> void:
 	if state_label:
 		state_label.text = "State: Walking"
 		
-	# Inside update_hud_stats() in Player.gd
 	if health_label:
 		health_label.text = "HP: " + PlayerStats.get_health()
 
 func take_damage(amount: int, attacker_pos: Vector3):
-	# Route the damage to the singleton
 	PlayerStats.take_damage(amount)
 	
 	var kb_dir = (global_position - attacker_pos).normalized()
