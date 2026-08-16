@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b118ljdbmw62g"]
 
-[ext_resource type="Script" uid="uid://cpe1ytofairvv" path="res://Scenes/MeleeEnemy.gd" id="1_50p1r"]
+[ext_resource type="Script" uid="uid://cpe1ytofairvv" path="res://Scripts/MeleeEnemy.gd" id="1_50p1r"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ttpud"]
 height = 4.8

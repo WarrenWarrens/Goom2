@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://cg8yakgevo7wv" path="res://Scripts/HUD.gd" id="1_64ctp"]
 [ext_resource type="Texture2D" uid="uid://dvjtaamqipajq" path="res://Assets/Head/port8.png" id="3_c3eba"]
 [ext_resource type="Texture2D" uid="uid://8w5e0y0w6c0w" path="res://Assets/ui.png" id="3_s3jbq"]
-[ext_resource type="Script" uid="uid://b6h0xasp8jsm7" path="res://Scenes/FPSCounter.gd" id="4_s3jbq"]
+[ext_resource type="Script" uid="uid://b6h0xasp8jsm7" path="res://Scripts/FPSCounter.gd" id="4_s3jbq"]
 
 [sub_resource type="Theme" id="Theme_ttpud"]
 default_font = ExtResource("1_37p78")
