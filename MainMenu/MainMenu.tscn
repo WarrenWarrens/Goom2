@@ -16,10 +16,6 @@ default_font_size = 30
 default_font = ExtResource("2_b76km")
 default_font_size = 30
 
-[sub_resource type="Theme" id="Theme_3p42x"]
-default_font = ExtResource("2_b76km")
-default_font_size = 30
-
 [sub_resource type="Theme" id="Theme_3clmd"]
 default_font = ExtResource("2_b76km")
 default_font_size = 30
@@ -45,20 +41,20 @@ process_mode = 3
 script = ExtResource("1_otibh")
 
 [node name="Label" type="Label" parent="." unique_id=4425683]
-offset_left = -33.0
-offset_top = -31.0
-offset_right = 1223.0
-offset_bottom = 360.0
+offset_left = 3.0
+offset_top = 9.0
+offset_right = 637.0
+offset_bottom = 42.0
 theme_override_fonts/font = ExtResource("2_b76km")
-theme_override_font_sizes/font_size = 180
+theme_override_font_sizes/font_size = 60
 text = "Goom"
 horizontal_alignment = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=2001701567]
-offset_left = -378.0
-offset_top = 218.0
-offset_right = 1542.0
-offset_bottom = 642.0
+offset_left = -1.0
+offset_top = 149.0
+offset_right = 637.0
+offset_bottom = 397.0
 
 [node name="MenuButtons" type="VBoxContainer" parent="CenterContainer" unique_id=1012700879]
 layout_mode = 2
@@ -67,25 +63,25 @@ theme_override_constants/separation = 20
 [node name="Play" type="Button" parent="CenterContainer/MenuButtons" unique_id=190024920]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_b76km")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
 text = "Levels"
 
 [node name="Options" type="Button" parent="CenterContainer/MenuButtons" unique_id=504399676]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_b76km")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
 text = "Options"
 
 [node name="Credits" type="Button" parent="CenterContainer/MenuButtons" unique_id=437880587]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_b76km")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
 text = "Credits"
 
 [node name="Exit" type="Button" parent="CenterContainer/MenuButtons" unique_id=1154746904]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_b76km")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
 text = "Exit"
 
 [node name="SettingsMenu" type="VBoxContainer" parent="CenterContainer" unique_id=1286223992]
@@ -149,27 +145,26 @@ layout_mode = 2
 [node name="TestLevelButton" type="Button" parent="CenterContainer/LevelsMenu" unique_id=1745361254]
 layout_mode = 2
 theme = SubResource("Theme_b76km")
+theme_override_font_sizes/font_size = 20
 text = "Test Level Two"
 
 [node name="LevelOneButton" type="Button" parent="CenterContainer/LevelsMenu" unique_id=531187009]
 layout_mode = 2
 theme = SubResource("Theme_lbqne")
+theme_override_font_sizes/font_size = 20
 text = "Test Level One
 "
 
 [node name="LevelTwoButton" type="Button" parent="CenterContainer/LevelsMenu" unique_id=321067295]
 layout_mode = 2
 theme = SubResource("Theme_430ii")
+theme_override_font_sizes/font_size = 20
 text = "Level Two"
-
-[node name="LevelThreeButton" type="Button" parent="CenterContainer/LevelsMenu" unique_id=265769609]
-layout_mode = 2
-theme = SubResource("Theme_3p42x")
-text = "Level Three"
 
 [node name="BackButton" type="Button" parent="CenterContainer/LevelsMenu" unique_id=1097326960]
 layout_mode = 2
 theme = SubResource("Theme_3clmd")
+theme_override_font_sizes/font_size = 20
 text = "Back"
 
 [node name="Background" type="CanvasLayer" parent="." unique_id=1019917609]
@@ -178,10 +173,19 @@ layer = -1
 [node name="MBG1" type="ColorRect" parent="Background" unique_id=2118255790]
 z_index = -10
 material = SubResource("ShaderMaterial_dfu4m")
-offset_right = 1149.0
-offset_bottom = 662.0
+offset_right = 640.0
+offset_bottom = 480.0
 mouse_filter = 2
 color = Color(0.964773, 0.848416, 0.869401, 1)
+
+[node name="MBG2" type="ColorRect" parent="Background" unique_id=367872642]
+visible = false
+z_index = -10
+material = SubResource("ShaderMaterial_dfu4m")
+offset_right = 640.0
+offset_bottom = 352.0
+mouse_filter = 2
+color = Color(0.330078, 0.99999994, 0.9244244, 1)
 
 [connection signal="pressed" from="CenterContainer/MenuButtons/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="CenterContainer/MenuButtons/Options" to="." method="_on_options_pressed"]
@@ -194,5 +198,4 @@ color = Color(0.964773, 0.848416, 0.869401, 1)
 [connection signal="pressed" from="CenterContainer/LevelsMenu/TestLevelButton" to="." method="_on_test_level_button_pressed"]
 [connection signal="pressed" from="CenterContainer/LevelsMenu/LevelOneButton" to="." method="_on_level_one_button_pressed"]
 [connection signal="pressed" from="CenterContainer/LevelsMenu/LevelTwoButton" to="." method="_on_level_two_button_pressed"]
-[connection signal="pressed" from="CenterContainer/LevelsMenu/LevelThreeButton" to="." method="_on_level_three_button_pressed"]
 [connection signal="pressed" from="CenterContainer/LevelsMenu/BackButton" to="." method="_on_back_button_pressed"]
