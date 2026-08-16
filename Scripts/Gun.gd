@@ -20,6 +20,22 @@ func _exit_tree() -> void:
 func make_flash():
 	var f = flash.instantiate()
 	add_child(f)
+	
+func check_hit():
+	for ray in gun_rays:
+		ray.force_raycast_update()
+		if ray.is_colliding():
+			var target = ray.get_collider()
+			if target.has_method("take_damage"):
+				target.take_damage(damage)
+
+				# Terminal output
+				print("Hit confirmed! Dealt ", damage, " to ", target.name)
+
+				# Trigger visual hit marker on the player
+				var player = get_tree().get_first_node_in_group("player")
+				if player.has_method("show_hit_marker"):
+					player.show_hit_marker()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

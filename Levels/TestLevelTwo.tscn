@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://cbve1v0dvw6cp" path="res://Scripts/Ladder.gd" id="12_fqk6u"]
 [ext_resource type="PackedScene" uid="uid://ckudr8chj1kgo" path="res://Scenes/Player.tscn" id="13_kih24"]
 [ext_resource type="PackedScene" uid="uid://b118ljdbmw62g" path="res://Scenes/MeleeEnemy.tscn" id="15_epros"]
+[ext_resource type="PackedScene" uid="uid://b34hpscvp0ncg" path="res://Scenes/Pickup.tscn" id="16_dcci8"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_epros"]
 _surfaces = [{
@@ -3617,3 +3618,6 @@ environment = SubResource("Environment_ttpud")
 
 [node name="MeleeEnemy" parent="." unique_id=2078049976 instance=ExtResource("15_epros")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.128456, 1.0509043, -39.27126)
+
+[node name="Pickup" parent="." unique_id=481539359 instance=ExtResource("16_dcci8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.959564, -29.204746)

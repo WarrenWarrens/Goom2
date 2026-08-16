@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://b34hpscvp0ncg"]
+
+[ext_resource type="Texture2D" uid="uid://d15d7jew4q2d2" path="res://Assets/health.png" id="1_eq05r"]
+[ext_resource type="Script" uid="uid://bokhn70tkada3" path="res://Scenes/Pickup.gd" id="1_uuccb"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_uuccb"]
+
+[node name="Pickup" type="Area3D" unique_id=481539359]
+script = ExtResource("1_uuccb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1492162927]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1, 0)
+shape = SubResource("SphereShape3D_uuccb")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=283193832]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 1, 0)
+billboard = 1
+texture = ExtResource("1_eq05r")

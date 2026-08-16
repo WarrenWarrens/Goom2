@@ -3,6 +3,7 @@
 [ext_resource type="FontFile" uid="uid://e1yckbnmsyen" path="res://Assets/Art/daydream_3/Daydream DEMO.otf" id="1_37p78"]
 [ext_resource type="Script" uid="uid://cg8yakgevo7wv" path="res://Scripts/HUD.gd" id="1_64ctp"]
 [ext_resource type="Texture2D" uid="uid://bfd5kbp81qf1x" path="res://Assets/Art/over.png" id="3_8sq4i"]
+[ext_resource type="Texture2D" uid="uid://dm23xbjaglu6q" path="res://Assets/Art/focus.png" id="4_g8s2e"]
 [ext_resource type="Script" uid="uid://b6h0xasp8jsm7" path="res://Scenes/FPSCounter.gd" id="4_s3jbq"]
 [ext_resource type="Texture2D" uid="uid://doe4yus103flx" path="res://Assets/meme.png" id="5_c3eba"]
 
@@ -114,6 +115,12 @@ offset_bottom = 65.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("1_37p78")
 text = "[E] to interact"
+
+[node name="HitMarker" type="Sprite2D" parent="CanvasLayer" unique_id=818074839]
+visible = false
+position = Vector2(549.99994, 279.99997)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_g8s2e")
 
 [node name="Label" type="Label" parent="." unique_id=1682726059]
 offset_right = 40.0

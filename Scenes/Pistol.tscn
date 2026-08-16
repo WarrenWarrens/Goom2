@@ -278,5 +278,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer2/CenterContainer" unique_id=1067906239]
+visible = false
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("9_dfu4m")
