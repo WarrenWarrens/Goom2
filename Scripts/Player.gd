@@ -13,8 +13,8 @@ const BASE_FOV: float = 75.0
 #@onready var axe = $Head/Axe
 @onready var pistol = $Head/Pistol
 @onready var weapons = [pistol]
-@onready var ammo_counter = $HUD/MarginContainer/Stats/Ammo/AmmoValue
-@onready var ammo_label = $HUD/MarginContainer/Stats/Ammo2/AmmoLabel
+@onready var ammo_counter = $HUD/MarginContainer/Stats/Values/AmmoValue
+@onready var ammo_label = $HUD/MarginContainer/Stats/Labels/AmmoLabel
 @onready var speed_label = $HUD/SpeedLabel
 @onready var state_label = $HUD/StateLabel
 @onready var health_label = $HUD/MarginContainer/Stats/Values/HealthValue
@@ -105,12 +105,12 @@ func equip_weapon(index: int) -> void:
 			if weapons[i].has_node("CanvasLayer"):
 				weapons[i].get_node("CanvasLayer").visible = true
 			
-			if weapons[i].get("is_gun") == true:
-				ammo_counter.visible = true
-				ammo_label.visible = true
-			else:
-				ammo_counter.visible = false
-				ammo_label.visible = false
+			#if weapons[i].get("is_gun") == true:
+				#ammo_counter.visible = true
+				#ammo_label.visible = true
+			#else:
+				#ammo_counter.visible = false
+				#ammo_label.visible = false
 		else:
 			weapons[i].visible = false
 			weapons[i].set_process(false)
