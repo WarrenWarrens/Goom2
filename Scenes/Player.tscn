@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://b0gd8hrqpvtbb" path="res://Scripts/Player.gd" id="1_onrkg"]
 [ext_resource type="Script" uid="uid://coq3vktn3p1tr" path="res://Scripts/InteractionRay.gd" id="2_gntrk"]
-[ext_resource type="PackedScene" uid="uid://bdxry7miuj5j7" path="res://Scenes/Axe.tscn" id="2_kyqiw"]
 [ext_resource type="PackedScene" uid="uid://ce82q17jqo7s3" path="res://Scenes/Kick.tscn" id="3_52ee3"]
 [ext_resource type="Script" uid="uid://eh1pb01xwdl0" path="res://Scripts/Kick.gd" id="4_bhhdu"]
 [ext_resource type="PackedScene" uid="uid://dvewtmm6d837k" path="res://Scenes/HUD.tscn" id="4_dewec"]
@@ -32,8 +31,6 @@ script = ExtResource("2_gntrk")
 
 [node name="Kick" parent="Head" unique_id=373542889 instance=ExtResource("3_52ee3")]
 script = ExtResource("4_bhhdu")
-
-[node name="Axe" parent="Head" unique_id=1316928759 instance=ExtResource("2_kyqiw")]
 
 [node name="Pistol" parent="Head" unique_id=1175262872 instance=ExtResource("4_nn08x")]
 

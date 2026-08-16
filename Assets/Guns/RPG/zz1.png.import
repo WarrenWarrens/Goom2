@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dp7e2o85c6rjr"
-path="res://.godot/imported/shootdemon.png-fb677ab9165f1d099b56516f01b813b6.ctex"
+uid="uid://ni1vaik8r2if"
+path="res://.godot/imported/zz1.png-ffead3a652a3971852e7eacf016e5a11.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/shootdemon.png"
-dest_files=["res://.godot/imported/shootdemon.png-fb677ab9165f1d099b56516f01b813b6.ctex"]
+source_file="res://Assets/Guns/RPG/zz1.png"
+dest_files=["res://.godot/imported/zz1.png-ffead3a652a3971852e7eacf016e5a11.ctex"]
 
 [params]
 

@@ -2,10 +2,8 @@
 
 [ext_resource type="FontFile" uid="uid://e1yckbnmsyen" path="res://Assets/Art/daydream_3/Daydream DEMO.otf" id="1_37p78"]
 [ext_resource type="Script" uid="uid://cg8yakgevo7wv" path="res://Scripts/HUD.gd" id="1_64ctp"]
-[ext_resource type="Texture2D" uid="uid://bfd5kbp81qf1x" path="res://Assets/Art/over.png" id="3_8sq4i"]
-[ext_resource type="Texture2D" uid="uid://dm23xbjaglu6q" path="res://Assets/Art/focus.png" id="4_g8s2e"]
+[ext_resource type="Texture2D" uid="uid://8w5e0y0w6c0w" path="res://Assets/ui.png" id="3_s3jbq"]
 [ext_resource type="Script" uid="uid://b6h0xasp8jsm7" path="res://Scenes/FPSCounter.gd" id="4_s3jbq"]
-[ext_resource type="Texture2D" uid="uid://doe4yus103flx" path="res://Assets/meme.png" id="5_c3eba"]
 
 [sub_resource type="Theme" id="Theme_ttpud"]
 default_font = ExtResource("1_37p78")
@@ -97,30 +95,9 @@ text = "0"
 
 [node name="Overlay" type="Sprite2D" parent="." unique_id=1741101678]
 z_index = -1
-position = Vector2(575, 302)
+position = Vector2(320, 406)
 scale = Vector2(1, 1.1512346)
-texture = ExtResource("3_8sq4i")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=693964665]
-layer = 10
-
-[node name="InteractPrompt" type="Label" parent="CanvasLayer" unique_id=2108105058]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -103.0
-offset_top = 37.0
-offset_right = 103.0
-offset_bottom = 65.0
-grow_horizontal = 2
-theme_override_fonts/font = ExtResource("1_37p78")
-text = "[E] to interact"
-
-[node name="HitMarker" type="Sprite2D" parent="CanvasLayer" unique_id=818074839]
-visible = false
-position = Vector2(549.99994, 279.99997)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("4_g8s2e")
+texture = ExtResource("3_s3jbq")
 
 [node name="Label" type="Label" parent="." unique_id=1682726059]
 offset_right = 40.0
@@ -128,25 +105,6 @@ offset_bottom = 23.0
 theme_override_fonts/font = ExtResource("1_37p78")
 text = "0"
 script = ExtResource("4_s3jbq")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=606596044]
-position = Vector2(1000.00006, 14)
-scale = Vector2(0.2265625, 0.2265625)
-texture = ExtResource("5_c3eba")
-
-[node name="Label2" type="Label" parent="." unique_id=1397319444]
-offset_left = 972.0
-offset_top = 37.0
-offset_right = 1139.0
-offset_bottom = 60.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 1
-theme_override_constants/shadow_offset_y = 1
-theme_override_constants/outline_size = 11
-theme_override_constants/shadow_outline_size = 12
-text = "www.BANDiCAM.com"
 
 [node name="SpeedLabel" type="Label" parent="." unique_id=1152036593]
 offset_left = 1.0

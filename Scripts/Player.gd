@@ -10,10 +10,9 @@ const BASE_FOV: float = 75.0
 @onready var camera: Camera3D = $Head/Camera3D
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 @onready var interact_ray = $Head/Camera3D/InteractionRay
-@onready var interact_prompt: Label = $HUD/CanvasLayer/InteractPrompt
-@onready var axe = $Head/Axe
+#@onready var axe = $Head/Axe
 @onready var pistol = $Head/Pistol
-@onready var weapons = [axe, pistol]
+@onready var weapons = [pistol]
 @onready var ammo_counter = $HUD/MarginContainer/Stats/Ammo/AmmoValue
 @onready var ammo_label = $HUD/MarginContainer/Stats/Ammo2/AmmoLabel
 @onready var speed_label = $HUD/SpeedLabel
@@ -89,13 +88,12 @@ func _process(_delta: float) -> void:
 		equip_weapon(current_weapon_index)
 	# Add more elif statements as you expand your weapons array
 	
-@onready var hit_marker = $HUD/CanvasLayer/HitMarker
 
-func show_hit_marker():
-	hit_marker.visible = true
-	# Hide it again after a brief moment
-	await get_tree().create_timer(0.1).timeout
-	hit_marker.visible = false
+#func show_hit_marker():
+	#hit_marker.visible = true
+	## Hide it again after a brief moment
+	#await get_tree().create_timer(0.1).timeout
+	#hit_marker.visible = false
 	
 func equip_weapon(index: int) -> void:
 	for i in range(weapons.size()):
