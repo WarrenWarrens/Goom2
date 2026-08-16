@@ -18,10 +18,16 @@ var player: CharacterBody3D
 enum State { IDLE, CHASE, ATTACK }
 var current_state = State.IDLE
 
+
+
 func _ready():
 	# Make sure your Player node is in the "player" group!
 	current_health = max_health
 	player = get_tree().get_first_node_in_group("player")
+	floor_constant_speed = true 
+	floor_stop_on_slope = true
+	floor_max_angle = deg_to_rad(45.0)
+	floor_snap_length = 0.5
 
 func take_damage(amount: int):
 	current_health -= amount
