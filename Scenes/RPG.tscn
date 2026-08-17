@@ -22,7 +22,8 @@ grow_vertical = 2
 
 [node name="GunSprite" type="Sprite2D" parent="CanvasLayer/Control" unique_id=1442138056]
 texture_filter = 1
-position = Vector2(-1, -170)
+position = Vector2(28.176483, -154.5)
+scale = Vector2(0.9088235, 0.90882355)
 texture = ExtResource("2_67f0t")
 
 [node name="MuzzlePos" type="Marker2D" parent="CanvasLayer/Control/GunSprite" unique_id=2065886365]
