@@ -1,30 +1,26 @@
 extends Area3D
 
-@export_enum("Health", "Armor", "Pistol Ammo") var pickup_type: String = "Health"
-@export var amount: int = 10
+enum PickupType { HEALTH, AMMO, WEAPON }
 
-@onready var sprite = $Sprite3D
-var start_y: float
+@export var type: PickupType = PickupType.WEAPON
+@export var weapon_name: String = "shotgun"
+@export var amount: int = 1
 
-func _ready():
-	# Connect the body_entered signal via code or the Node panel
+func _ready() -> void:
 	body_entered.connect(_on_body_entered)
-	start_y = sprite.position.y
 
-func _process(delta):
-	# Creates a gentle floating bob effect
-	sprite.position.y = start_y + (sin(Time.get_ticks_msec() / 200.0) * 0.2)
-
-func _on_body_entered(body):
-	if body.is_in_group("player"):
-		match pickup_type:
-			"Health":
-				PlayerStats.change_health(amount)
-			"Armor":
-				# Assuming standard green armor
-				PlayerStats.pickup_armor(amount, false) 
-			"Pistol Ammo":
-				PlayerInventory.change_ammo("pistol", amount)
-		
-		# Play a pickup sound globally here if desired
-		queue_free()
+func _on_body_entered(body: Node3D) -> void:
+	if body.is_in_group("Player"):
+		match type:
+			PickupType.HEALTH:
+				if body.has_method("add_health"):
+					body.add_health(amount)
+					queue_free()
+			PickupType.AMMO:
+				if body.has_method("add_ammo"):
+					body.add_ammo(amount)
+					queue_free()
+			PickupType.WEAPON:
+				if body.has_method("unlock_weapon"):
+					body.unlock_weapon(weapon_name)
+					queue_free()

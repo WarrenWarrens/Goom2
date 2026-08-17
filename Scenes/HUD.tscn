@@ -5,6 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://dvjtaamqipajq" path="res://Assets/Head/port8.png" id="3_c3eba"]
 [ext_resource type="Texture2D" uid="uid://8w5e0y0w6c0w" path="res://Assets/ui.png" id="3_s3jbq"]
 [ext_resource type="Script" uid="uid://b6h0xasp8jsm7" path="res://Scripts/FPSCounter.gd" id="4_s3jbq"]
+[ext_resource type="Texture2D" uid="uid://bm2ebmdjfrjti" path="res://Assets/Art/hit3.png" id="6_t385i"]
+[ext_resource type="Texture2D" uid="uid://cj6nn8yfdr0i2" path="res://Assets/Art/hit2.png" id="7_nfm57"]
 
 [sub_resource type="Theme" id="Theme_ttpud"]
 default_font = ExtResource("1_37p78")
@@ -102,3 +104,14 @@ offset_top = 50.0
 offset_right = 41.0
 offset_bottom = 73.0
 theme_override_fonts/font = ExtResource("1_37p78")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1713443032]
+texture_filter = 1
+position = Vector2(320, 200)
+texture = ExtResource("6_t385i")
+
+[node name="HitMarker" type="Sprite2D" parent="." unique_id=1981759877]
+visible = false
+texture_filter = 1
+position = Vector2(320, 200)
+texture = ExtResource("7_nfm57")

@@ -60,3 +60,4 @@ target_position = Vector3(0, 4.8, 0)
 [node name="HUD" parent="." unique_id=2074623536 instance=ExtResource("4_dewec")]
 
 [node name="PauseMenu" parent="." unique_id=619445293 instance=ExtResource("5_5ixxa")]
+visible = false

@@ -20,6 +20,7 @@ const BASE_FOV: float = 75.0
 @onready var speed_label = $HUD/SpeedLabel
 @onready var state_label = $HUD/StateLabel
 @onready var health_label = $HUD/MarginContainer/Stats/Values/HealthValue
+@onready var hit_marker = $HUD/HitMarker
 
 var current_weapon_index: int = 0
 var cursor_locked = true
@@ -156,3 +157,13 @@ func take_damage(amount: int, attacker_pos: Vector3):
 	var kb_dir = (global_position - attacker_pos).normalized()
 	kb_dir.y = 0
 	knockback_velocity = kb_dir * 5.0
+	
+func show_hit_marker():
+	# Turn it on
+	hit_marker.visible = true
+
+	# Wait for 0.1 seconds
+	await get_tree().create_timer(0.1).timeout
+
+	# Turn it off
+	hit_marker.visible = false
