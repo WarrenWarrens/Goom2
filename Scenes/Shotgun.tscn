@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://blodlnliv2p4m"]
+
+[ext_resource type="Script" uid="uid://cl1k5arsgig02" path="res://Scripts/Gun.gd" id="1_4kb2a"]
+[ext_resource type="Texture2D" uid="uid://c75nt7a1781wm" path="res://Assets/Guns/Shotgun/spas11.png" id="2_4kb2a"]
+
+[node name="Shotgun" type="Node3D" unique_id=373542889]
+script = ExtResource("1_4kb2a")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1876754425]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=1502333828]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 126.0
+offset_bottom = 126.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GunSprite" type="Sprite2D" parent="CanvasLayer/Control" unique_id=1442138056]
+texture_filter = 1
+position = Vector2(53.588226, -141)
+scale = Vector2(0.8294118, 0.82941175)
+texture = ExtResource("2_4kb2a")
+
+[node name="MuzzlePos" type="Marker2D" parent="CanvasLayer/Control/GunSprite" unique_id=200458943]
+position = Vector2(-9, 6)
+
+[node name="GunRays" type="Node3D" parent="." unique_id=282192932]
+
+[node name="RayCast3D" type="RayCast3D" parent="GunRays" unique_id=1125729014]
+target_position = Vector3(0, 0, -20)
