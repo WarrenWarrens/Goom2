@@ -85,6 +85,7 @@ scale = Vector2(1, 1.1512346)
 texture = ExtResource("3_s3jbq")
 
 [node name="Label" type="Label" parent="." unique_id=1682726059]
+visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_fonts/font = ExtResource("1_37p78")
@@ -92,6 +93,7 @@ text = "0"
 script = ExtResource("4_s3jbq")
 
 [node name="SpeedLabel" type="Label" parent="." unique_id=1152036593]
+visible = false
 offset_left = 1.0
 offset_top = 26.0
 offset_right = 41.0
@@ -99,6 +101,7 @@ offset_bottom = 49.0
 theme_override_fonts/font = ExtResource("1_37p78")
 
 [node name="StateLabel" type="Label" parent="." unique_id=2127396518]
+visible = false
 offset_left = 1.0
 offset_top = 50.0
 offset_right = 41.0
@@ -115,3 +118,8 @@ visible = false
 texture_filter = 1
 position = Vector2(320, 200)
 texture = ExtResource("7_nfm57")
+
+[node name="EventLog" type="VBoxContainer" parent="." unique_id=399682762]
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true

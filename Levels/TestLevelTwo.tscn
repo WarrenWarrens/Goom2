@@ -74,6 +74,8 @@ max_health = 20
 
 [node name="Pickup" parent="." unique_id=481539359 instance=ExtResource("16_dcci8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.959564, -29.204746)
+type = 0
+amount = 20
 
 [node name="Door" parent="." unique_id=1817243544 instance=ExtResource("17_ev0a0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5220165, -53.85357)

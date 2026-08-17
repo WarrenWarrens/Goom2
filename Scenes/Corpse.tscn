@@ -1,9 +1,19 @@
 [gd_scene format=3 uid="uid://cl2rddvxijnkg"]
 
 [ext_resource type="Texture2D" uid="uid://clnafxvedbnxs" path="res://Assets/Art/bones.png" id="1_k04ty"]
+[ext_resource type="Script" uid="uid://cd2ryntky3ql4" path="res://Scenes/Corpse.gd" id="1_r4x44"]
 
-[node name="Sprite3D" type="Sprite3D" unique_id=1493311963]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+[sub_resource type="SphereShape3D" id="SphereShape3D_ttpud"]
+radius = 4.0
+
+[node name="Corpse" type="CharacterBody3D" unique_id=124550206]
+script = ExtResource("1_r4x44")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=914315949]
+shape = SubResource("SphereShape3D_ttpud")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=768974679]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 2, 0)
 billboard = 2
 texture_filter = 2
 texture = ExtResource("1_k04ty")
