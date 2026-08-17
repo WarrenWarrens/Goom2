@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://yhqfx1lkqyw7"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ttpud"]
+radius = 3.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yp4o6"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[node name="Area3D" type="Area3D" unique_id=2064216687]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=22908298]
+shape = SubResource("SphereShape3D_ttpud")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=1088142313]
+sprite_frames = SubResource("SpriteFrames_yp4o6")
+animation = &"new_animation"
