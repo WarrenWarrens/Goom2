@@ -1,9 +1,0 @@
-[gd_scene format=3 uid="uid://durbwgj5xbqtl"]
-
-[ext_resource type="Texture2D" uid="uid://d03bvtjnt8ivj" path="res://Assets/Effects/MF1/qq1.png" id="2_j6iv3"]
-[ext_resource type="Script" uid="uid://8xe1bydar1jd" path="res://Scenes/MuzzleFlash.gd" id="2_rx2yw"]
-
-[node name="MuzzleFlash" type="Sprite2D" unique_id=1546222485]
-z_index = -2
-texture = ExtResource("2_j6iv3")
-script = ExtResource("2_rx2yw")
