@@ -2,9 +2,12 @@
 
 [ext_resource type="Script" uid="uid://b0gd8hrqpvtbb" path="res://Scripts/Player.gd" id="1_onrkg"]
 [ext_resource type="Script" uid="uid://coq3vktn3p1tr" path="res://Scripts/InteractionRay.gd" id="2_gntrk"]
+[ext_resource type="PackedScene" uid="uid://bf28fmwks4yf4" path="res://Scenes/Rifle.tscn" id="4_bhhdu"]
 [ext_resource type="PackedScene" uid="uid://dvewtmm6d837k" path="res://Scenes/HUD.tscn" id="4_dewec"]
 [ext_resource type="PackedScene" uid="uid://bqmqhk1fsyhsm" path="res://Scenes/Pistol.tscn" id="4_nn08x"]
 [ext_resource type="PackedScene" uid="uid://b0iuaegeuhgbn" path="res://Scenes/PauseMenu.tscn" id="5_5ixxa"]
+[ext_resource type="PackedScene" uid="uid://dchb4xaa366da" path="res://Scenes/RPG.tscn" id="5_megsn"]
+[ext_resource type="PackedScene" uid="uid://blodlnliv2p4m" path="res://Scenes/Shotgun.tscn" id="6_yoq75"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ttpud"]
 radius = 0.6
@@ -28,6 +31,27 @@ target_position = Vector3(0, 0, -8)
 script = ExtResource("2_gntrk")
 
 [node name="Pistol" parent="Head" unique_id=1175262872 instance=ExtResource("4_nn08x")]
+
+[node name="Rifle" parent="Head" unique_id=373542889 instance=ExtResource("4_bhhdu")]
+visible = false
+weapon_name = "rifle"
+damage = 4
+is_automatic = true
+fire_rate = 0.08
+
+[node name="RPG" parent="Head" unique_id=450060131 instance=ExtResource("5_megsn")]
+visible = false
+weapon_name = "rpg"
+damage = 15
+fire_rate = 0.5
+is_explosive = true
+
+[node name="Shotgun" parent="Head" unique_id=112921912 instance=ExtResource("6_yoq75")]
+visible = false
+weapon_name = "shotgun"
+damage = 10
+fire_rate = 0.25
+pellet_count = 10
 
 [node name="CeilingCheck" type="RayCast3D" parent="." unique_id=962993918]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)

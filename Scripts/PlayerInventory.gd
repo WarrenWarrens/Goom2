@@ -3,16 +3,16 @@ extends Node
 # Scalable dictionaries for ammo and keys
 var ammo = {
 	"pistol": 50,
-	"shotgun": 0,
-	"rocket": 0,
-	"assault": 0
+	"rifle": 100,
+	"shotgun": 100,
+	"rpg": 100
 }
 
 var max_ammo = {
 	"pistol": 200,
+	"rifle": 500,
 	"shotgun": 50,
-	"rocket": 50,
-	"assault": 200
+	"rpg": 200
 }
 
 var keys = {

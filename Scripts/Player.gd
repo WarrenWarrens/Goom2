@@ -11,7 +11,10 @@ const BASE_FOV: float = 75.0
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 @onready var interact_ray = $Head/Camera3D/InteractionRay
 @onready var pistol = $Head/Pistol
-@onready var weapons = [pistol]
+@onready var rifle = $Head/Rifle
+@onready var shotgun = $Head/Shotgun
+@onready var rpg = $Head/RPG
+@onready var weapons = [pistol, rifle, shotgun, rpg]
 @onready var ammo_counter = $HUD/MarginContainer/Stats/Values/AmmoValue
 @onready var ammo_label = $HUD/MarginContainer/Stats/Labels/AmmoLabel
 @onready var speed_label = $HUD/SpeedLabel
@@ -79,6 +82,12 @@ func _process(_delta: float) -> void:
 	elif Input.is_action_just_pressed("weapon_2") and weapons.size() > 1:
 		current_weapon_index = 1
 		equip_weapon(current_weapon_index)
+	elif Input.is_action_just_pressed("weapon_3") and weapons.size() > 2:
+		current_weapon_index = 2
+		equip_weapon(current_weapon_index)
+	elif Input.is_action_just_pressed("weapon_4") and weapons.size() > 3:
+		current_weapon_index = 3
+		equip_weapon(current_weapon_index)
 	# Add more elif statements as you expand your weapons array
 	
 
@@ -128,6 +137,18 @@ func update_hud_stats() -> void:
 		
 	if health_label:
 		health_label.text = "HP: " + PlayerStats.get_health()
+		
+	if weapons.size() > 0:
+		var active_weapon = weapons[current_weapon_index]
+		
+		# Check if the active weapon node has the 'weapon_name' variable
+		if "weapon_name" in active_weapon:
+			var w_name = active_weapon.weapon_name
+			
+			if ammo_label and ammo_counter:
+				# Capitalizes the first letter (e.g., "pistol" becomes "Pistol")
+				ammo_label.text = w_name.capitalize() + " Ammo:"
+				ammo_counter.text = PlayerInventory.get_ammo(w_name)
 
 func take_damage(amount: int, attacker_pos: Vector3):
 	PlayerStats.take_damage(amount)

@@ -1,34 +1,7 @@
 [gd_scene format=3 uid="uid://bqmqhk1fsyhsm"]
 
 [ext_resource type="Script" uid="uid://cl1k5arsgig02" path="res://Scripts/Gun.gd" id="1_cvufa"]
-[ext_resource type="Texture2D" uid="uid://dvvlsabc3xktr" path="res://Assets/Guns/Pistol/pistol7.png" id="2_gf3gw"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_walli"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_gf3gw")
-}],
-"loop": 1,
-"name": &"Idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_gf3gw")
-}],
-"loop": 0,
-"name": &"Shoot",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_gf3gw")
-}],
-"loop": 0,
-"name": &"Shoot2",
-"speed": 10.0
-}]
+[ext_resource type="Texture2D" uid="uid://c2dcyclwt32ud" path="res://Assets/Guns/Pistol/pistol2.png" id="2_ebdfm"]
 
 [node name="Pistol" type="Node3D" unique_id=373542889]
 script = ExtResource("1_cvufa")
@@ -47,11 +20,13 @@ offset_bottom = 126.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GunSprite" type="AnimatedSprite2D" parent="CanvasLayer/Control" unique_id=114979047]
-position = Vector2(80, -153)
-scale = Vector2(0.7585227, 0.75852275)
-sprite_frames = SubResource("SpriteFrames_walli")
-animation = &"Idle"
+[node name="GunSprite" type="Sprite2D" parent="CanvasLayer/Control" unique_id=1124600278]
+texture_filter = 3
+position = Vector2(0, -140)
+texture = ExtResource("2_ebdfm")
+
+[node name="MuzzlePos" type="Marker2D" parent="CanvasLayer/Control/GunSprite" unique_id=372818658]
+position = Vector2(96, 21)
 
 [node name="GunRays" type="Node3D" parent="." unique_id=282192932]
 

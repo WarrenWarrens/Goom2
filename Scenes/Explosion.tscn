@@ -1,26 +1,53 @@
 [gd_scene format=3 uid="uid://yhqfx1lkqyw7"]
 
+[ext_resource type="Script" uid="uid://ltb82af7m48r" path="res://Scenes/Explosion.gd" id="1_mbc3v"]
+[ext_resource type="Texture2D" uid="uid://dmknqjwlbknqw" path="res://Assets/Shot1.png" id="2_s3lrl"]
+[ext_resource type="Texture2D" uid="uid://bf58ybg22gcji" path="res://Assets/Blast1.png" id="3_nbpma"]
+[ext_resource type="Texture2D" uid="uid://dhv7imihg517o" path="res://Assets/Blast2.png" id="4_1fpbg"]
+[ext_resource type="Texture2D" uid="uid://bksjq5em43f3g" path="res://Assets/Blast3.png" id="5_ut2vh"]
+[ext_resource type="Texture2D" uid="uid://fyjaj5pv2ipo" path="res://Assets/Blast4.png" id="6_tjecr"]
+[ext_resource type="Texture2D" uid="uid://dmux5lp802iwj" path="res://Assets/Blast5.png" id="7_ofo4s"]
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_ttpud"]
 radius = 3.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yp4o6"]
 animations = [{
-"frames": [],
-"loop": 1,
-"name": &"default",
-"speed": 5.0
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_s3lrl")
 }, {
-"frames": [],
-"loop": 1,
-"name": &"new_animation",
+"duration": 1.0,
+"texture": ExtResource("3_nbpma")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_1fpbg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ut2vh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_tjecr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ofo4s")
+}],
+"loop": 0,
+"name": &"explode",
 "speed": 5.0
 }]
 
 [node name="Area3D" type="Area3D" unique_id=2064216687]
+script = ExtResource("1_mbc3v")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=22908298]
 shape = SubResource("SphereShape3D_ttpud")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=1088142313]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+billboard = 2
+texture_filter = 2
 sprite_frames = SubResource("SpriteFrames_yp4o6")
-animation = &"new_animation"
+animation = &"explode"
+frame = 5
+frame_progress = 1.0
