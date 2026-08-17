@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 # --- Movement Variables ---
-const WALK_SPEED: float = 7.0
+const WALK_SPEED: float = 15.0
 const MOUSE_SENS: float = 0.002
 const BASE_FOV: float = 75.0
 
