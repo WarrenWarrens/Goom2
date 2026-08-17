@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cl2rddvxijnkg"]
+
+[ext_resource type="Texture2D" uid="uid://clnafxvedbnxs" path="res://Assets/Art/bones.png" id="1_k04ty"]
+
+[node name="Sprite2D" type="Sprite2D" unique_id=251881328]
+texture = ExtResource("1_k04ty")

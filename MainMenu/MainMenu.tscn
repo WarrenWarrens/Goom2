@@ -8,14 +8,6 @@
 default_font = ExtResource("2_b76km")
 default_font_size = 30
 
-[sub_resource type="Theme" id="Theme_lbqne"]
-default_font = ExtResource("2_b76km")
-default_font_size = 30
-
-[sub_resource type="Theme" id="Theme_430ii"]
-default_font = ExtResource("2_b76km")
-default_font_size = 30
-
 [sub_resource type="Theme" id="Theme_3clmd"]
 default_font = ExtResource("2_b76km")
 default_font_size = 30
@@ -148,19 +140,6 @@ theme = SubResource("Theme_b76km")
 theme_override_font_sizes/font_size = 20
 text = "Test Level Two"
 
-[node name="LevelOneButton" type="Button" parent="CenterContainer/LevelsMenu" unique_id=531187009]
-layout_mode = 2
-theme = SubResource("Theme_lbqne")
-theme_override_font_sizes/font_size = 20
-text = "Test Level One
-"
-
-[node name="LevelTwoButton" type="Button" parent="CenterContainer/LevelsMenu" unique_id=321067295]
-layout_mode = 2
-theme = SubResource("Theme_430ii")
-theme_override_font_sizes/font_size = 20
-text = "Level Two"
-
 [node name="BackButton" type="Button" parent="CenterContainer/LevelsMenu" unique_id=1097326960]
 layout_mode = 2
 theme = SubResource("Theme_3clmd")
@@ -196,6 +175,4 @@ color = Color(0.330078, 0.99999994, 0.9244244, 1)
 [connection signal="pressed" from="CenterContainer/SettingsMenu/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="CenterContainer/CreditsMenu/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="CenterContainer/LevelsMenu/TestLevelButton" to="." method="_on_test_level_button_pressed"]
-[connection signal="pressed" from="CenterContainer/LevelsMenu/LevelOneButton" to="." method="_on_level_one_button_pressed"]
-[connection signal="pressed" from="CenterContainer/LevelsMenu/LevelTwoButton" to="." method="_on_level_two_button_pressed"]
 [connection signal="pressed" from="CenterContainer/LevelsMenu/BackButton" to="." method="_on_back_button_pressed"]

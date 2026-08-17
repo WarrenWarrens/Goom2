@@ -5,6 +5,7 @@ extends CharacterBody3D
 @export var attack_range: float = 2.5
 @export var detection_range: float = 25.0
 @export var attack_cooldown: float = 1.0
+@export var corpse_scene: PackedScene = preload("res://Scenes/Corpse.tscn")
 
 @onready var los_ray = $RayCast3D
 @onready var attack_timer = $AttackTimer
@@ -37,9 +38,14 @@ func take_damage(amount: int):
 	if current_health <= 0:
 		die()
 
-func die():
-	# Optional: Spawn a corpse sprite or play a death sound before freeing
-	queue_free()
+func die() -> void:
+	if corpse_scene:
+		var corpse = corpse_scene.instantiate()
+		get_tree().current_scene.add_child(corpse)
+		corpse.global_position = global_position
+		corpse.rotation.y = rotation.y # Match facing direction
+
+	queue_free() # Remove active enemy node
 	
 	
 #regular on the ground

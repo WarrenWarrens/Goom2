@@ -1,13 +1,8 @@
-[gd_scene format=3 uid="uid://ci76extjrko88"]
+[gd_scene format=3 uid="uid://durbwgj5xbqtl"]
 
-[ext_resource type="Script" uid="uid://c4g2lkmf33gad" path="res://Scripts/MuzzleFlash.gd" id="1_cclob"]
+[ext_resource type="Texture2D" uid="uid://d03bvtjnt8ivj" path="res://Assets/Effects/MF1/qq1.png" id="2_j6iv3"]
+[ext_resource type="Script" uid="uid://8xe1bydar1jd" path="res://Scenes/MuzzleFlash.gd" id="2_rx2yw"]
 
-[node name="MuzzleFlash" type="OmniLight3D" unique_id=205335493]
-light_energy = 16.0
-script = ExtResource("1_cclob")
-
-[node name="Timer" type="Timer" parent="." unique_id=1667700172]
-wait_time = 0.005
-autostart = true
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="MuzzleFlash" type="Sprite2D" unique_id=1546222485]
+texture = ExtResource("2_j6iv3")
+script = ExtResource("2_rx2yw")
