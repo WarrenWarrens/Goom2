@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dmcuhnde2hd1y"]
+
+[ext_resource type="Texture2D" uid="uid://b1ua3xpjb6n4q" path="res://textures/str_bloodvein1.png" id="1_xt80o"]
+
+[resource]
+albedo_texture = ExtResource("1_xt80o")
+metallic_specular = 0.0
+texture_filter = 2
