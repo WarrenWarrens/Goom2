@@ -24,10 +24,17 @@ const BASE_FOV: float = 75.0
 @onready var health_label = $HUD/MarginContainer/Stats/Values/HealthValue
 @onready var hit_marker = $HUD/HitMarker
 
+@onready var kick_ray = $Head/Camera3D/KickRay
+@onready var kick_sprite = $HUD/KickSprite
+
 var current_weapon_index: int = 0
 var cursor_locked = true
 var knockback_velocity: Vector3 = Vector3.ZERO
 var last_y_velocity: float = 0.0
+
+var can_kick: bool = true
+@export var kick_damage: int = 25
+@export var kick_cooldown: float = 0.8
 
 
 func _ready() -> void:
@@ -92,13 +99,35 @@ func _process(_delta: float) -> void:
 		current_weapon_index = 3
 		equip_weapon(current_weapon_index)
 	# Add more elif statements as you expand your weapons array
+	if Input.is_action_just_pressed("kick") and can_kick:
+		perform_kick()
 	
 
-#func show_hit_marker():
-	#hit_marker.visible = true
-	## Hide it again after a brief moment
-	#await get_tree().create_timer(0.1).timeout
-	#hit_marker.visible = false
+func perform_kick() -> void:
+	can_kick = false
+	
+	# Show the boot sprite and play the animation
+	if kick_sprite:
+		kick_sprite.visible = true
+		kick_sprite.play("KickAttack") # Assuming you have a "kick" animation
+	
+	# Check for hits instantly
+	kick_ray.force_raycast_update()
+	if kick_ray.is_colliding():
+		var target = kick_ray.get_collider()
+		if target.has_method("take_damage"):
+			target.take_damage(kick_damage)
+			show_hit_marker()
+			print("Kicked for ", kick_damage, " damage!")
+	
+	# Wait for the animation to finish, hide the leg, and start cooldown
+	if kick_sprite:
+		await kick_sprite.animation_finished
+		kick_sprite.visible = false
+	
+	# Prevent spamming the kick key
+	await get_tree().create_timer(kick_cooldown).timeout
+	can_kick = true
 	
 func equip_weapon(index: int) -> void:
 	for i in range(weapons.size()):

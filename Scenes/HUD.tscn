@@ -7,9 +7,38 @@
 [ext_resource type="Script" uid="uid://b6h0xasp8jsm7" path="res://Scripts/FPSCounter.gd" id="4_s3jbq"]
 [ext_resource type="Texture2D" uid="uid://bm2ebmdjfrjti" path="res://Assets/Art/hit3.png" id="6_t385i"]
 [ext_resource type="Texture2D" uid="uid://cj6nn8yfdr0i2" path="res://Assets/Art/hit2.png" id="7_nfm57"]
+[ext_resource type="Texture2D" uid="uid://dl7dbfx41x23c" path="res://Assets/Art/Kick/kick1.png" id="8_o2vyp"]
+[ext_resource type="Texture2D" uid="uid://b5pqjfmp3qyx8" path="res://Assets/Art/Kick/kick2.png" id="9_hhtw7"]
+[ext_resource type="Texture2D" uid="uid://dnb3qopajm8o2" path="res://Assets/Art/Kick/kick3.png" id="10_w5mne"]
+[ext_resource type="Texture2D" uid="uid://dolhp24uprn6o" path="res://Assets/Art/Kick/blank.png" id="11_xuldq"]
 
 [sub_resource type="Theme" id="Theme_ttpud"]
 default_font = ExtResource("1_37p78")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ttpud"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_o2vyp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_hhtw7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_w5mne")
+}],
+"loop": 0,
+"name": &"KickAttack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_xuldq")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="HUD" type="CanvasLayer" unique_id=2074623536]
 script = ExtResource("1_64ctp")
@@ -123,3 +152,8 @@ texture = ExtResource("7_nfm57")
 offset_right = 40.0
 offset_bottom = 40.0
 metadata/_edit_use_anchors_ = true
+
+[node name="KickSprite" type="AnimatedSprite2D" parent="." unique_id=519154791]
+visible = false
+position = Vector2(312, 205)
+sprite_frames = SubResource("SpriteFrames_ttpud")
