@@ -5,6 +5,8 @@ const WALK_SPEED: float = 15.0
 const MOUSE_SENS: float = 0.002
 const BASE_FOV: float = 75.0
 
+#PLAYER IS 160 tall 48 WIDE
+
 # --- Node References ---
 @onready var head: Node3D = $Head
 @onready var camera: Camera3D = $Head/Camera3D
