@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://dv2qofyisvvim"
+path="res://.godot/imported/forest.1.map-8734777250f4c4ec23925846e111241d.tres"
+
+[deps]
+
+source_file="res://Levels/MAP/autosave/forest.1.map"
+dest_files=["res://.godot/imported/forest.1.map-8734777250f4c4ec23925846e111241d.tres"]
+
+[params]
+
