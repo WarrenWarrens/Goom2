@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://ctl1ljihmlrbd" path="res://textures/05af2fa7aae1bdbe2cd590e075462790-dithered.png" id="7_xl3m3"]
 [ext_resource type="Texture2D" uid="uid://bsfhw1n887lwt" path="res://textures/ddce50fbfd632458ae86b42a56caf875-dithered.png" id="8_qtt7w"]
 [ext_resource type="Material" uid="uid://b3wj8ubnuwwyb" path="res://textures/2a331889001ee784e42000523639330e-dithered.tres" id="9_8cr2y"]
-[ext_resource type="Material" uid="uid://dmcuhnde2hd1y" path="res://textures/str_bloodvein1.tres" id="10_dcci8"]
+[ext_resource type="Material" path="res://textures/str_bloodvein1.tres" id="10_dcci8"]
 [ext_resource type="Material" uid="uid://mb3dml5w4eni" path="res://textures/32e09f1f33f7ad65594de433be654f3c-dithered.tres" id="10_ynbjh"]
 [ext_resource type="Texture2D" uid="uid://byn46evt5wmk6" path="res://textures/str_metalflr8.png" id="12_qhvnh"]
 [ext_resource type="PackedScene" uid="uid://ckudr8chj1kgo" path="res://Scenes/Player.tscn" id="13_kih24"]
