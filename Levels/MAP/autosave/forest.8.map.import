@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://dqxeld1vsm8t7"
+path="res://.godot/imported/forest.8.map-5176d9246972024e97e287086b23ab2c.tres"
+
+[deps]
+
+source_file="res://Levels/MAP/autosave/forest.8.map"
+dest_files=["res://.godot/imported/forest.8.map-5176d9246972024e97e287086b23ab2c.tres"]
+
+[params]
+

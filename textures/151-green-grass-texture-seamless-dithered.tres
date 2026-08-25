@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cncv57wx4jh1j"]
+
+[ext_resource type="Texture2D" uid="uid://dv6uvmbh83o46" path="res://textures/151-green-grass-texture-seamless-dithered.png" id="1_2s1c2"]
+
+[resource]
+albedo_texture = ExtResource("1_2s1c2")
+metallic_specular = 0.0
+texture_filter = 2

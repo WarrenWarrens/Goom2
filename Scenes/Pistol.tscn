@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bqmqhk1fsyhsm"]
 
 [ext_resource type="Script" uid="uid://cl1k5arsgig02" path="res://Scripts/Gun.gd" id="1_cvufa"]
-[ext_resource type="Texture2D" uid="uid://c2dcyclwt32ud" path="res://Assets/Guns/Pistol/pistol2.png" id="2_ebdfm"]
+[ext_resource type="Texture2D" uid="uid://sa5pleppc74y" path="res://Assets/Guns/Pistol/pistol5.png" id="2_ebdfm"]
 
 [node name="Pistol" type="Node3D" unique_id=373542889]
 script = ExtResource("1_cvufa")

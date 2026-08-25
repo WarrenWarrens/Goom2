@@ -1,26 +1,41 @@
 [gd_scene format=3 uid="uid://ds0nxrux5xtxg"]
 
 [ext_resource type="Script" uid="uid://dpsemyh8pve7f" path="res://Scripts/Door.gd" id="1_38ogf"]
+[ext_resource type="Texture2D" uid="uid://ckoospjt0gc0d" path="res://Assets/Art/cross.jpg" id="2_mw28t"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ttpud"]
+size = Vector3(3.2819214, 1.0281982, 0.49975586)
 
 [sub_resource type="BoxMesh" id="BoxMesh_vyp0t"]
+size = Vector3(3.0946655, 1, 0.38300148)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tgb25"]
-size = Vector3(5, 5, 5)
+size = Vector3(5, 5.4726563, 12.050537)
 
 [node name="Door" type="AnimatableBody3D" unique_id=1817243544]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 script = ExtResource("1_38ogf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=119377879]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14041138, 0.014099121, 0.027709961)
 shape = SubResource("BoxShape3D_ttpud")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=234761733]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18222046, 0, 0.023720935)
 mesh = SubResource("BoxMesh_vyp0t")
+
+[node name="Sprite3D" type="Sprite3D" parent="MeshInstance3D" unique_id=79907332]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0.20440006)
+texture = ExtResource("2_mw28t")
+
+[node name="Sprite3D2" type="Sprite3D" parent="MeshInstance3D" unique_id=1022941328]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, -0.24316761)
+texture = ExtResource("2_mw28t")
 
 [node name="DetectionArea" type="Area3D" parent="." unique_id=1292841932]
 collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea" unique_id=261059008]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.23632813, 0.24450684)
 shape = SubResource("BoxShape3D_tgb25")

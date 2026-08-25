@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bf28fmwks4yf4"]
 
 [ext_resource type="Script" uid="uid://cl1k5arsgig02" path="res://Scripts/Gun.gd" id="1_xtu1t"]
-[ext_resource type="Texture2D" uid="uid://boddwm81cb4kg" path="res://Assets/Guns/AR/ar9.png" id="2_xtu1t"]
+[ext_resource type="Texture2D" uid="uid://cx0rltixram7i" path="res://Assets/Guns/AR/ar7.png" id="2_xtu1t"]
 
 [node name="Rifle" type="Node3D" unique_id=373542889]
 script = ExtResource("1_xtu1t")

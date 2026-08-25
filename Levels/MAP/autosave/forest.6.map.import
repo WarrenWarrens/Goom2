@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://bx0vwtcshrfjl"
+path="res://.godot/imported/forest.6.map-b89694cfcffc9ae86892e6325cd756bc.tres"
+
+[deps]
+
+source_file="res://Levels/MAP/autosave/forest.6.map"
+dest_files=["res://.godot/imported/forest.6.map-b89694cfcffc9ae86892e6325cd756bc.tres"]
+
+[params]
+

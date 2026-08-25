@@ -3,7 +3,8 @@
 [ext_resource type="Script" uid="uid://cpe1ytofairvv" path="res://Scripts/MeleeEnemy.gd" id="1_50p1r"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ttpud"]
-height = 4.8
+radius = 1.5
+height = 3.0181642
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50p1r"]
 load_path = "res://.godot/imported/demon.png-338c8265853a59ecfbcd4cebc7f35e32.s3tc.ctex"
@@ -12,7 +13,7 @@ load_path = "res://.godot/imported/demon.png-338c8265853a59ecfbcd4cebc7f35e32.s3
 script = ExtResource("1_50p1r")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1843648994]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.609082, 0)
 shape = SubResource("CapsuleShape3D_ttpud")
 
 [node name="RayCast3D" type="RayCast3D" parent="." unique_id=1882842926]

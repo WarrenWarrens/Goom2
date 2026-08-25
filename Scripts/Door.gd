@@ -3,8 +3,8 @@ extends AnimatableBody3D
 @export var requires_key: bool = false
 @export var required_key: String = "red"
 # How far the door moves when opened. Adjust for sliding up, down, or sideways.
-@export var open_offset: Vector3 = Vector3(0, 3, 0) 
-@export var speed: float = 0.5
+@export var open_offset: Vector3 = Vector3(14, 0, 0) 
+@export var speed: float = 1
 
 @onready var detection_area = $DetectionArea
 var start_pos: Vector3
@@ -20,7 +20,7 @@ func _on_body_entered(body):
 	if body.is_in_group("player"):
 		# Check the dictionary from PlayerInventory
 		if requires_key and not PlayerInventory.has_key(required_key):
-			print("You need the " + required_key + " keycard!")
+			print("You need the " + required_key + " key")
 			# Optional: Play a "locked" sound effect here
 			return
 		
