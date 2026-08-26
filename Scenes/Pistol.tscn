@@ -31,4 +31,4 @@ position = Vector2(96, 21)
 [node name="GunRays" type="Node3D" parent="." unique_id=282192932]
 
 [node name="RayCast3D" type="RayCast3D" parent="GunRays" unique_id=1125729014]
-target_position = Vector3(0, 0, -20)
+target_position = Vector3(0, 0, -150)

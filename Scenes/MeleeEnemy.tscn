@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://cpe1ytofairvv" path="res://Scripts/MeleeEnemy.gd" id="1_50p1r"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ttpud"]
-radius = 1.5
-height = 3.0181642
+radius = 3.0
+height = 6.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_50p1r"]
 load_path = "res://.godot/imported/demon.png-338c8265853a59ecfbcd4cebc7f35e32.s3tc.ctex"
