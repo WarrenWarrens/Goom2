@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://b3nfb3fxoedsi"]
+
+[ext_resource type="Script" uid="uid://b502q3gkypg1e" path="res://Scenes/Crate.gd" id="1_7msr7"]
+[ext_resource type="Texture2D" uid="uid://uau0x3nnylb8" path="res://Assets/Head/port9.png" id="1_qgfyo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vyp0t"]
+size = Vector3(0.5048981, 0.5996094, 0.14520264)
+
+[node name="Crate" type="StaticBody3D" unique_id=1232042021]
+script = ExtResource("1_7msr7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=460669075]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013267517, 0.044921875, -0.012908936)
+shape = SubResource("BoxShape3D_vyp0t")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=910527827]
+texture = ExtResource("1_qgfyo")

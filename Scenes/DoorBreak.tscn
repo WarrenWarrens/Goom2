@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dqqkxj1oisswd"]
+
+[ext_resource type="Texture2D" uid="uid://urdd4wjcohbl" path="res://Assets/Art/cross2.png" id="1_cd5sm"]
+[ext_resource type="Script" uid="uid://behuhqlip4voa" path="res://Scenes/DoorBreak.gd" id="1_kn128"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ttpud"]
+size = Vector3(2.6226501, 2.9663086, 0.17980957)
+
+[node name="BreakableDoor" type="StaticBody3D" unique_id=1992436677]
+script = ExtResource("1_kn128")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1685488345]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.014907837, 0.9831543, 0.00579834)
+shape = SubResource("BoxShape3D_ttpud")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=730112235]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 1, 0)
+texture = ExtResource("1_cd5sm")
