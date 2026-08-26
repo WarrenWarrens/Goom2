@@ -1,0 +1,14 @@
+[gd_resource type="Environment" format=3 uid="uid://cpnxla22wvrvm"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7a8fh"]
+
+[sub_resource type="Sky" id="Sky_vyp0t"]
+sky_material = SubResource("ProceduralSkyMaterial_7a8fh")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_vyp0t")
+ambient_light_source = 3
+ambient_light_color = Color(0.1584723, 0.15847233, 0.1584723, 1)
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.01
